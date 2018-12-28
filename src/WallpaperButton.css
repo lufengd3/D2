@@ -1,0 +1,33 @@
+.bottomBar {
+  background-color: #222;
+  width: 750;
+  height: 120;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  position: fixed;
+  bottom: -2;
+  left: 0;
+  border-top: 1 solid #ffffff;
+}
+
+.buttonContainer {
+  width: 374;
+  height: 120;
+  display: flex;
+  justify-content: center;
+}
+
+.updateButtonContainer {
+  width: 374;
+  height: 120;
+  display: flex;
+  justify-content: center;
+  border-left: 1 solid #ffffff;
+}
+
+.buttonText {
+  font-size: 56;
+  color: white;
+  text-align: center;
+}
