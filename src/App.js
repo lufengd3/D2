@@ -7,7 +7,7 @@ import WallPaperButton from './WallpaperButton';
 import styles from './App.css';
 
 // const BASE_URL = "https://source.unsplash.com/random/750x1800/";
-const BASE_URL = "https://source.unsplash.com/random";
+const BASE_URL = "http://lufeng.me/p";
 
 class App extends Component {
   state = {
@@ -39,20 +39,22 @@ class App extends Component {
   updateImg = () => {
     Toast.show('Update Image...');
 
-    fetch(BASE_URL).then((res) => {
-      if (res.url) {
+    fetch(BASE_URL)
+      .then(res => res.json())
+      .then((data) => {
+        if (data.success && data.url) {
+          this.setState({
+            imgUrl: data.url
+          });
+        } else {
+          throw new Error('Need URL');
+        }
+      }).catch((e) => {
+        console.error(e);
         this.setState({
-          imgUrl: res.url
+          imgUrl: BASE_URL
         });
-      } else {
-        throw new Error('Need URL');
-      }
-    }).catch((e) => {
-      console.error(e);
-      this.setState({
-        imgUrl: BASE_URL
       });
-    })
   }
 
   render() {

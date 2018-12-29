@@ -11,7 +11,7 @@ class WallPaperButton extends Component {
   constructor(props) {
     super(props);
 
-    this.text = 'Save Picture';
+    this.text = 'Save';
     this.pressHandler = 'savePicture';
 
     if (isWeex) {
@@ -49,7 +49,7 @@ class WallPaperButton extends Component {
         <Touchable onPress={this[this.pressHandler]} style={styles.buttonContainer}>
           <Text style={styles.buttonText}>{this.text}</Text>
         </Touchable>
-        {updateImg ? 
+        {updateImg ?
           <Touchable onPress={updateImg} style={styles.updateButtonContainer}>
             <Text style={styles.buttonText}>Next</Text>
           </Touchable>
