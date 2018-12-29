@@ -10,6 +10,7 @@
   "dependencies": {
     "rax": "^0.6.5",
     "rax-image": "^0.6.8",
+    "rax-scrollview": "^0.6.5",
     "rax-text": "^0.6.5",
     "rax-touchable": "^0.6.5",
     "rax-view": "^0.6.5",

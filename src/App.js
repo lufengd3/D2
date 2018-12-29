@@ -4,6 +4,7 @@ import Image from 'rax-image';
 import Toast from 'universal-toast';
 import {isWeex} from 'universal-env';
 import WallPaperButton from './WallpaperButton';
+import AppPanel from './mods/AppPanel';
 import styles from './App.css';
 
 // const BASE_URL = "https://source.unsplash.com/random/750x1800/";
@@ -62,7 +63,8 @@ class App extends Component {
 
     return (
       <View style={styles.app}>
-        <Image onLoad={this.handleLoad} source={{uri: imgUrl}} resizeMode="cover" style={{width, height}} />
+        <Image onLoad={this.handleLoad} source={{uri: imgUrl}} resizeMode="cover" style={{width, height, position: 'absolute', top: 0, left: 0}} />
+        <AppPanel />
         <WallPaperButton url={imgUrl} updateImg={this.updateImg}></WallPaperButton>
       </View>
     );
