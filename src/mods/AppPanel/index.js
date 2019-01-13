@@ -4,6 +4,8 @@ import View from 'rax-view';
 import ScrollView from 'rax-scrollview';
 import Touchable from 'rax-touchable';
 import {isWeex} from 'universal-env';
+import Time from '../Time';
+import AppItem from '../AppItem';
 import styles from './style.css';
 
 class AppPanel extends Component {
@@ -27,8 +29,10 @@ class AppPanel extends Component {
 
     return (
       <ScrollView style={styles.container}>
+        <Time />
         {apps.map((app) => {
-          return <appicon packageName={app.packageName} />;
+          // return <appicon packageName={app.packageName} />;
+          return <AppItem data={app} />
         })}
       </ScrollView>
     );

@@ -1,0 +1,11 @@
+.container {
+  width: 750;
+  height: 96;
+  justify-content: center;
+  align-items: center;
+}
+
+.appName {
+  font-size: 48;
+  color: #ffffff;
+}

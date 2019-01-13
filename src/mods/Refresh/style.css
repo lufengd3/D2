@@ -1,0 +1,9 @@
+.container {
+  width: 96;
+  height: 96;
+  background-color: indianred;
+  border-radius: 48;
+  position: fixed;
+  bottom: 144;
+  right: 24;
+}
