@@ -6,3 +6,10 @@
   bottom: 0;
   background-color: transparent;
 }
+
+.appItemContainer {
+  width: 750;
+  flex-direction: row;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}

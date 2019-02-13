@@ -3,7 +3,7 @@ import View from 'rax-view';
 import Image from 'rax-image';
 import Toast from 'universal-toast';
 import {isWeex} from 'universal-env';
-import WallPaperButton from './WallpaperButton';
+import WallPaperButton from './mods/WallpaperButton';
 import AppPanel from './mods/AppPanel';
 import Refresh from './mods/Refresh';
 import styles from './App.css';
@@ -39,7 +39,7 @@ class App extends Component {
   }
 
   updateImg = () => {
-    Toast.show('Update Image...');
+    // Toast.show('Update Image...');
 
     fetch(BASE_URL)
       .then(res => res.json())
@@ -64,10 +64,11 @@ class App extends Component {
 
     return (
       <View style={styles.app}>
-        <Image onLoad={this.handleLoad} source={{uri: imgUrl}} resizeMode="cover" style={{width, height, position: 'absolute', top: 0, left: 0}} />
+        <Image source={{uri: imgUrl}} resizeMode="cover" style={{width, height, position: 'absolute', top: 0, left: 0}} />
+        <View style={{width, height, position: 'absolute', top: 0, left: 0, backgroundColor: 'rgba(30, 30, 30, 0.1'}} />
         <AppPanel />
         <WallPaperButton url={imgUrl} updateImg={this.updateImg}></WallPaperButton>
-        <Refresh />
+        {/* <Refresh /> */}
       </View>
     );
   }

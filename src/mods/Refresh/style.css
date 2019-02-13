@@ -4,6 +4,8 @@
   background-color: indianred;
   border-radius: 48;
   position: fixed;
-  bottom: 144;
-  right: 24;
+  bottom: 100;
+  right: 46;
+  justify-content: center;
+  align-items: center;
 }

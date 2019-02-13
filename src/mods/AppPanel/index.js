@@ -6,6 +6,7 @@ import Touchable from 'rax-touchable';
 import {isWeex} from 'universal-env';
 import Time from '../Time';
 import AppItem from '../AppItem';
+import WallPaperButton from '../WallpaperButton';
 import styles from './style.css';
 
 class AppPanel extends Component {
@@ -28,12 +29,14 @@ class AppPanel extends Component {
     const {apps} = this.state;
 
     return (
-      <ScrollView style={styles.container}>
+      <ScrollView style={[styles.container, {bottom: WallPaperButton.moduleHeight}]}>
         <Time />
-        {apps.map((app) => {
-          // return <appicon packageName={app.packageName} />;
-          return <AppItem data={app} />
-        })}
+        <View style={styles.appItemContainer}>
+          {apps.map((app) => {
+            // return <appicon packageName={app.packageName} />;
+            return <AppItem data={app} />
+          })}
+        </View>
       </ScrollView>
     );
   }

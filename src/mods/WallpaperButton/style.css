@@ -1,7 +1,7 @@
 .bottomBar {
   background-color: #222;
   width: 750;
-  height: 120;
+  height: 80;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -13,21 +13,21 @@
 
 .buttonContainer {
   width: 374;
-  height: 120;
+  height: 80;
   display: flex;
   justify-content: center;
 }
 
 .updateButtonContainer {
   width: 374;
-  height: 120;
+  height: 80;
   display: flex;
   justify-content: center;
   border-left: 1 solid #ffffff;
 }
 
 .buttonText {
-  font-size: 56;
+  font-size: 36;
   color: white;
   text-align: center;
 }

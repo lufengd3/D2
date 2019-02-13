@@ -3,11 +3,13 @@ import Text from 'rax-text';
 import View from 'rax-view';
 import Touchable from 'rax-touchable';
 import {isWeex} from 'universal-env';
-import styles from './WallpaperButton.css';
+import styles from './style.css';
 
 const bg = "https://source.unsplash.com/random";
 
 class WallPaperButton extends Component {
+  static moduleHeight = styles.bottomBar.height;
+
   constructor(props) {
     super(props);
 
