@@ -17,7 +17,7 @@ class AppPanel extends Component {
   componentWillMount() {
     if (isWeex) {
       const PkgManager = require('@weex-module/PackageManager');
-      const data = PkgManager.getApps();
+      const data = PkgManager.getApps('all');
 
       this.setState({
         apps: data

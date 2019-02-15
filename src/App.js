@@ -68,7 +68,7 @@ class App extends Component {
         <View style={{width, height, position: 'absolute', top: 0, left: 0, backgroundColor: 'rgba(30, 30, 30, 0.1'}} />
         <AppPanel />
         <WallPaperButton url={imgUrl} updateImg={this.updateImg}></WallPaperButton>
-        {/* <Refresh /> */}
+        <Refresh />
       </View>
     );
   }
