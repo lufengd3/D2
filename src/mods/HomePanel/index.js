@@ -1,11 +1,18 @@
 import {createElement, Component} from 'rax';
+import View from 'rax-view';
 import Text from 'rax-text';
 import Touchable from 'rax-touchable';
 import styles from './style.css';
 
 class FastPanel extends Component {
   render() {
-    return <View>FastPanel</View>
+    return (
+      <View>
+        <Text style={{color: '#fff'}}>
+          Home     Panel++
+        </Text>
+      </View>
+    );
   }
 }
 

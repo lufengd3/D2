@@ -10,7 +10,7 @@ class Mod extends Component {
 
   state = {
     menuVisable: false,
-    top: 0, 
+    top: 0,
     left: 0
   };
 
@@ -59,13 +59,13 @@ class Mod extends Component {
     this.hideMenu();
 
     const {data} = this.props;
-    
+
     PkgManager.uninstallApp(data.packageName);
   }
 
   showAppInfo = () => {
     this.hideMenu();
-    
+
     const {data} = this.props;
 
     PkgManager.showAppInfo(data.packageName);
@@ -91,7 +91,7 @@ class Mod extends Component {
         <appicon name={data.packageName} style={styles.appicon} />
         <Text style={styles.appName} numberOfLines={1}>{data.appName}</Text>
       </Touchable>,
-      menuVisable ? 
+      menuVisable ?
       <View>
         <Touchable style={styles.transparentBG} onPress={this.hideMenu} />
         <View style={menuContainerStyle}>
@@ -101,7 +101,7 @@ class Mod extends Component {
           <Touchable onPress={this.showAppInfo}>
             <Text>App Info</Text>
           </Touchable>
-        </View> 
+        </View>
       </View>
       : null
     ];

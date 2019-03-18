@@ -37,7 +37,7 @@ class App extends Component {
       <View style={styles.app} id={'appcontainer'}>
         <View style={{width, height, position: 'absolute', top: 0, left: 0, backgroundColor: 'rgba(30, 30, 30, 0.1'}} />
         <Slider
-          index={1}
+          index={2}
           style={styles.slider}
           loop={false}
           showsPagination={false}

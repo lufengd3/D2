@@ -15,7 +15,7 @@ class WallPaperButton extends Component {
   state = {
     loading: false,
   };
-  changeWallPaperText = '换壁纸';
+  changeWallPaperText = 'Update';
 
   updateWallPaper = () => {
     this.setState({

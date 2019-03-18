@@ -1,13 +1,26 @@
 .container {
-  background-color: red;
-  width: 300;
-  height: 300;
+  /* background-color: indianred; */
+  /* position: absolute; */
+  flex: 0;
+  width: 750;
+}
+
+.appGroup {
+  width: 750;
+}
+
+.groupTitle {
+  color: #ffffff;
+  font-size: 38;
+  position: absolute;
+  top: 45;
+  left: 24;
 }
 
 .appItemContainer {
-  width: 750;
+  width: 702;
+  margin-left: 24;
   flex-direction: row;
   justify-content: flex-start;
   flex-wrap: wrap;
-  background-color: green;
 }
