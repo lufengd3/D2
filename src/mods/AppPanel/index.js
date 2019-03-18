@@ -19,21 +19,24 @@ class AppPanel extends Component {
       const PkgManager = require('@weex-module/PackageManager');
       const data = PkgManager.getApps('all');
 
-      this.setState({
-        apps: data
-      })
+      if (data && data.length) {
+        this.setState({
+          apps: data
+        });
+      }
     }
   }
 
   render() {
     const {apps} = this.state;
+    const containerStyle = this.props.style;
 
     return (
-      <ScrollView style={[styles.container, {bottom: WallPaperButton.moduleHeight}]}>
+      <ScrollView style={[styles.container]}>
+      {/* <ScrollView style={[styles.container, containerStyle, {height: containerStyle.height - WallPaperButton.moduleHeight}]}> */}
         <Time />
         <View style={styles.appItemContainer}>
           {apps.map((app) => {
-            // return <appicon packageName={app.packageName} />;
             return <AppItem data={app} />
           })}
         </View>

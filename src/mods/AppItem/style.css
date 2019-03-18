@@ -15,3 +15,25 @@
   height: 96;
   margin-bottom: 8;
 }
+
+.transparentBG {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: transparent;
+}
+
+.menuContainer {
+  width: 300;
+  height: 100;
+  background-color: #ffffff;
+  position: fixed;
+  top: -10;
+  left: 0;
+  border-radius: 10;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}

@@ -2,60 +2,66 @@ import {createElement, Component} from 'rax';
 import Text from 'rax-text';
 import View from 'rax-view';
 import Touchable from 'rax-touchable';
+import Toast from 'universal-toast';
 import {isWeex} from 'universal-env';
 import styles from './style.css';
 
-const bg = "https://source.unsplash.com/random";
+// const BASE_URL = "https://source.unsplash.com/random/750x1800/";
+const BASE_URL = "http://lufeng.me/p";
 
 class WallPaperButton extends Component {
   static moduleHeight = styles.bottomBar.height;
 
-  constructor(props) {
-    super(props);
+  state = {
+    loading: false,
+  };
+  changeWallPaperText = '换壁纸';
 
-    this.text = 'Save';
-    this.pressHandler = 'savePicture';
+  updateWallPaper = () => {
+    this.setState({
+      loading: true
+    });
 
-    if (isWeex) {
-      const androidPattern = /android/i;
+    fetch(BASE_URL)
+      .then(res => res.json())
+      .then((data) => {
+        this.setState({
+          loading: false
+        });
 
-      if (androidPattern.test(navigator.platform)) {
-        this.text = 'Like';
-        this.pressHandler = 'setWallPaper';
-      }
-    }
+        if (data.success && data.url) {
+          this.setWallPaper(data.url);
+        } else {
+          throw new Error('Need URL');
+        }
+      }).catch((e) => {
+        this.setState({
+          loading: false
+        });
 
+        console.error(e);
+        Toast.show(e.message);
+      });
   }
 
-  setWallPaper = () => {
-    const {url} = this.props;
-
-    if (!url) {
-      alert('No image chooesed');
-      return;
-    }
-
+  setWallPaper = (url = '') => {
     const WallPaper = require('@weex-module/WallPaper');
     WallPaper.update(url);
   }
 
-  savePicture = (e) => {
-    alert('save pic to local');
-  }
-
   render() {
-    const {updateImg} = this.props;
+    const {loading} = this.state;
 
     return (
       <View style={styles.bottomBar}>
-        <Touchable onPress={this[this.pressHandler]} style={styles.buttonContainer}>
-          <Text style={styles.buttonText}>{this.text}</Text>
+        <Touchable onPress={this.updateWallPaper} style={styles.buttonContainer}>
+          <Text style={styles.buttonText}>{this.changeWallPaperText} {loading ? '...' : ''}</Text>
         </Touchable>
-        {updateImg ?
+        {/* {updateImg ?
           <Touchable onPress={updateImg} style={styles.updateButtonContainer}>
             <Text style={styles.buttonText}>Next</Text>
           </Touchable>
-        : null}
+        : null} */}
       </View>
     );
   }
