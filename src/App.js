@@ -35,7 +35,7 @@ class App extends Component {
 
     return (
       <View style={styles.app} id={'appcontainer'}>
-        <View style={{width, height, position: 'absolute', top: 0, left: 0, backgroundColor: 'rgba(30, 30, 30, 0.1'}} />
+        <View style={{width, height, position: 'absolute', top: 0, left: 0, backgroundColor: 'rgba(30, 30, 30, 0.2)'}} />
         <Slider
           index={2}
           style={styles.slider}
@@ -50,13 +50,13 @@ class App extends Component {
           </View>
 
           <View style={styles.sliderItemContainer}>
-            <HomePanel />
+            <HomePanel style={{width, height}} />
           </View>
 
           <View style={styles.sliderItemContainer}>
             {/* <Image source={{uri: imgUrl}} resizeMode="cover" style={{width, height, position: 'absolute', top: 0, left: 0}} /> */}
             <AppPanel style={{width, height}} />
-            <WallPaperButton />
+            {/* <WallPaperButton /> */}
             <Refresh />
           </View>
 

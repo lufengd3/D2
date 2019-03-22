@@ -4,10 +4,8 @@ import View from 'rax-view';
 import ScrollView from 'rax-scrollview';
 import Touchable from 'rax-touchable';
 import {isWeex} from 'universal-env';
-import pinyinlite from 'pinyinlite';
 import pinyin from 'tiny-pinyin';
 import {sortObjectArrByValue} from '../../utils/index';
-import Time from '../Time';
 import AppItem from '../AppItem';
 import WallPaperButton from '../WallpaperButton';
 import styles from './style.css';
@@ -69,7 +67,6 @@ class AppPanel extends Component {
     return (
       <ScrollView style={[styles.container, this.props.style]}>
       {/* <ScrollView style={[styles.container, containerStyle, {height: containerStyle.height - WallPaperButton.moduleHeight}]}> */}
-        <Time />
         {appData.map((appGroup) => {
           return (
             <View style={styles.appGroup}>

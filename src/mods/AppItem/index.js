@@ -85,7 +85,6 @@ class Mod extends Component {
       left
     };
 
-    // source={{uri: 'http://img11.360buyimg.com/n7/jfs/t1/29098/8/6781/96596/5c629972E533ca008/d0c93d8b0f1c11d1.jpg'}} style={{width: 200, height: 200}}
     return [
       <Touchable style={styles.container} onPress={this.launch} onLongPress={this.showMenu} ref="itemContainer">
         <appicon name={data.packageName} style={styles.appicon} />

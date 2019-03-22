@@ -11,15 +11,15 @@
 
 .groupTitle {
   color: #ffffff;
-  font-size: 38;
+  font-size: 42;
   position: absolute;
-  top: 45;
-  left: 24;
+  top: 36;
+  left: 36;
 }
 
 .appItemContainer {
-  width: 702;
-  margin-left: 24;
+  width: 630;
+  margin-left: 80;
   flex-direction: row;
   justify-content: flex-start;
   flex-wrap: wrap;
