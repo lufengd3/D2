@@ -9,29 +9,27 @@ import FastPanel from './mods/FastPanel';
 import AppPanel from './mods/AppPanel';
 import Refresh from './mods/Refresh';
 import styles from './App.css';
+import {observer} from 'mobx-rax';
 
+@observer
 class App extends Component {
-  state = {
-    width: 750,
-    height: screen.height * (750 / screen.width),
-  };
 
   componentDidMount() {
+    const {containerStore} = this.props.store;
+
     if (isWeex) {
       const dom = require('@weex-module/dom');
-
       dom.getComponentRect('viewport', (e) => {
         if (e && e.size && e.size.height) {
-          this.setState({
-            height: e.size.height
-          });
+          containerStore.height = e.size.height;
         }
       });
     }
   }
 
   render() {
-    const {width, height} = this.state;
+    const {containerStore, appsStore} = this.props.store;
+    const {width, height} = containerStore;
 
     return (
       <View style={styles.app} id={'appcontainer'}>
@@ -50,12 +48,12 @@ class App extends Component {
           </View>
 
           <View style={styles.sliderItemContainer}>
-            <HomePanel style={{width, height}} />
+            <HomePanel style={{width, height}} appsStore={appsStore} />
           </View>
 
           <View style={styles.sliderItemContainer}>
             {/* <Image source={{uri: imgUrl}} resizeMode="cover" style={{width, height, position: 'absolute', top: 0, left: 0}} /> */}
-            <AppPanel style={{width, height}} />
+            <AppPanel style={{width, height}} appsStore={appsStore} />
             {/* <WallPaperButton /> */}
             <Refresh />
           </View>

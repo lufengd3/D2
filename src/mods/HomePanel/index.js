@@ -13,7 +13,7 @@ class FastPanel extends Component {
       <View style={[styles.container, this.props.style]}>
         <Time />
         <Dock />
-        <SysApp />
+        <SysApp {...this.props} />
       </View>
     );
   }

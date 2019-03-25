@@ -1,4 +1,5 @@
 import {createElement, render} from 'rax';
 import App from './App';
+import store from './store';
 
-render(<App />);
+render(<App store={store} />);

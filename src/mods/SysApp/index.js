@@ -4,6 +4,7 @@ import View from 'rax-view';
 import Image from 'rax-image';
 import Binding from 'weex-bindingx';
 import {isWeex} from 'universal-env';
+import AppItem from '../AppItem';
 
 import styles from './style.css';
 
@@ -155,27 +156,17 @@ class App extends Component {
   }
 
   render() {
+    const {homeApps} = this.props.appsStore;
+
     return (
       <View style={styles.container}>
-
-
-        <View style={[styles.btn,{backgroundColor:'#6A1B9A'}]} ref="b1" onClick={()=>{this.clickBtn()}}>
-          <Text style={[styles.text]}>
-            A
-          </Text>
-        </View>
-
-        <View style={[styles.btn,{backgroundColor:'#0277BD'}]} ref="b2" onClick={()=>{this.clickBtn()}}>
-          <Text style={[styles.text]}>
-            B
-          </Text>
-        </View>
-
-        <View style={[styles.btn,{backgroundColor:'#FF9800'}]} ref="b3" onClick={()=>{this.clickBtn()}}>
-          <Text style={[styles.text]}>
-            C
-          </Text>
-        </View>
+        {homeApps && homeApps.map((app, index) => {
+          return (
+            <View style={[styles.btn]} ref={`b${index + 1}`} onClick={this.clickBtn}>
+              <AppItem data={app} hideTitle={true} />
+            </View>
+          )
+        })}
 
         <View style={[styles.btn]} ref="main_btn" onClick={()=>{this.clickBtn()}}>
           <Image style={[styles.image]} ref="main_image" source={{uri:'https://gw.alicdn.com/tfs/TB1PZ25antYBeNjy1XdXXXXyVXa-128-128.png'}} />

@@ -72,7 +72,7 @@ class Mod extends Component {
   }
 
   render() {
-    const {data} = this.props;
+    const {data, hideTitle} = this.props;
     const {menuVisable, top, left} = this.state;
 
     if (!data || !data.appName) {
@@ -88,7 +88,7 @@ class Mod extends Component {
     return [
       <Touchable style={styles.container} onPress={this.launch} onLongPress={this.showMenu} ref="itemContainer">
         <appicon name={data.packageName} style={styles.appicon} />
-        <Text style={styles.appName} numberOfLines={1}>{data.appName}</Text>
+        {hideTitle ? null : <Text style={styles.appName} numberOfLines={1}>{data.appName}</Text>}
       </Touchable>,
       menuVisable ?
       <View>

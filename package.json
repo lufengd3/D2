@@ -8,6 +8,8 @@
     "lint": "eslint --ext .js --ext .jsx ./src"
   },
   "dependencies": {
+    "mobx": "^5.9.0",
+    "mobx-rax": "^0.6.4",
     "rax": "^0.6.5",
     "rax-image": "^0.6.8",
     "rax-scrollview": "^0.6.5",

@@ -5,14 +5,17 @@
  * @param {*} arr
  * @param {*} key
  */
-export function sortObjectArrByValue(arr, key) {
+export function sortArrByObjectValue(arr, key) {
   const data = [];
   arr.map((item) => {
     data.push([item, item[key]]);
   });
 
   const sortedData = data.sort((a, b) => {
-    return String(a[1]).charCodeAt(0) - String(b[1]).charCodeAt(0);
+    const strA = String(a[1]).toLowerCase();
+    const strB = String(b[1]).toLowerCase();
+
+    return strA.localeCompare(strB);
   });
 
   return sortedData.map((item) => {
