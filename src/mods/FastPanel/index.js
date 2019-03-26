@@ -9,7 +9,6 @@ class FastPanel extends Component {
     return (
       <View>
         <Text style={{color: '#fff'}}>
-          FastPanel
         </Text>
       </View>
     );

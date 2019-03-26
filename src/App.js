@@ -3,7 +3,6 @@ import View from 'rax-view';
 import Image from 'rax-image';
 import Slider from 'rax-slider';
 // import {isWeex} from 'universal-env';
-import WallPaperButton from './mods/WallpaperButton';
 import HomePanel from './mods/HomePanel';
 import FastPanel from './mods/FastPanel';
 import AppPanel from './mods/AppPanel';
@@ -29,7 +28,7 @@ class App extends Component {
       <View style={styles.app} id={'appcontainer'}>
         <View style={{width, height, position: 'absolute', top: 0, left: 0, backgroundColor: 'rgba(30, 30, 30, 0.2)'}} />
         <Slider
-          // index={2}
+          index={1}
           style={styles.slider}
           loop={false}
           showsPagination={false}
@@ -38,18 +37,17 @@ class App extends Component {
         >
 
           <View style={styles.sliderItemContainer}>
-            <HomePanel style={{width, height}} />
+            <FastPanel />
           </View>
 
-          {/* <View style={styles.sliderItemContainer}>
-            <FastPanel />
-          </View> */}
+          <View style={styles.sliderItemContainer}>
+            <HomePanel style={{width, height}} />
+          </View>
 
           <View style={styles.sliderItemContainer}>
             {/* <Image source={{uri: imgUrl}} resizeMode="cover" style={{width, height, position: 'absolute', top: 0, left: 0}} /> */}
             <AppPanel style={{width, height}} />
-            {/* <WallPaperButton /> */}
-            <Refresh />
+            {/* <Refresh /> */}
           </View>
 
         </Slider>

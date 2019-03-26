@@ -1,6 +1,6 @@
 .bottomBar {
   background-color: #222;
-  width: 750;
+  width: 80;
   height: 80;
   display: flex;
   flex-direction: row;
@@ -8,27 +8,23 @@
   position: fixed;
   bottom: -2;
   left: 0;
-  border-top: 1 solid #ffffff;
 }
 
 .buttonContainer {
   /* width: 374; */
-  width: 750;
+  width: 80;
   height: 80;
   display: flex;
   justify-content: center;
 }
 
-.updateButtonContainer {
-  width: 374;
-  height: 80;
-  display: flex;
-  justify-content: center;
-  border-left: 1 solid #ffffff;
+.image {
+  width: 64;
+  height: 64;
 }
 
 .buttonText {
-  font-size: 36;
+  font-size: 18;
   color: white;
   text-align: center;
 }

@@ -5,7 +5,29 @@
   margin-top: 40;
 }
 
+.timeContainer {
+  flex-direction: row;
+  align-items: flex-end;
+}
+
 .time {
   font-size: 96;
+  color: #ffffff;
+}
+
+.sec {
+  font-size: 48;
+  color: #ffffff;
+  margin-bottom: 12;
+}
+
+.date {
+  font-size: 36;
+  color: #ffffff;
+  margin-right: 8;
+}
+
+.weekday {
+  font-size: 36;
   color: #ffffff;
 }

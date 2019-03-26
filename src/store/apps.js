@@ -21,7 +21,7 @@ class ObservableAppsStore {
       if (data && data.length) {
         const apps = this.processAppsInfo(data);
         this.pinyinApps = this.sortAppsByPinyin(apps);
-        this.sysApps = this.filterSysApps(apps);
+        this.filterSysApps(apps);
       }
     }
   }
@@ -43,7 +43,7 @@ class ObservableAppsStore {
       // 生成拼音并按拼音分组
       data.map((item, index) => {
         const appNamePinyin = pinyin.convertToPinyin(item.appName);
-        const firstChar = appNamePinyin[0];
+        const firstChar = appNamePinyin[0].toUpperCase();
         item['pinyin'] = appNamePinyin;
 
         if (!appMap[firstChar]) {
@@ -72,20 +72,37 @@ class ObservableAppsStore {
 
   filterSysApps(data) {
     const apps = [];
-    const appNameWhiteList = [
-      '电话',
-      '相机',
-      '浏览器',
-    ];
-    data.map((item) => {
-      const index = appNameWhiteList.indexOf(item.appName);
-      if (index > -1) {
-        apps[index] = item;
-      }
-    });
+    const locale = require('@weex-module/locale');
+    locale.getLanguage((e) => {
+      const lang = e.match('zh') ? 'zh' : 'en';
+      const appNameWhiteList = this.getAppNameWhiteList(lang);
 
-    // 如果 whitelist 里的应用不存在，过滤掉，否则会有下标数据 undefine
-    return apps.filter(item => item);
+      data.map((item) => {
+        const index = appNameWhiteList.indexOf(item.appName.toLowerCase());
+        if (index > -1) {
+          apps[index] = item;
+        }
+      });
+
+      // 如果 whitelist 里的应用不存在，过滤掉，否则会有下标数据 undefine
+      this.sysApps = apps.filter(item => item);
+    });
+  }
+
+  getAppNameWhiteList(lang) {
+    if (lang === 'zh') {
+      return [
+        '电话',
+        '相机',
+        '浏览器',
+      ];
+    } else {
+      return [
+        'phone',
+        'camera',
+        'browser',
+      ];
+    }
   }
 
 }

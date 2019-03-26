@@ -2,6 +2,7 @@ import {createElement, Component, findDOMNode} from 'rax';
 import Text from 'rax-text';
 import View from 'rax-view';
 import Touchable from 'rax-touchable';
+import emitter from 'tiny-emitter/instance';
 import styles from './style.css';
 
 const PkgManager = require('@weex-module/PackageManager');
@@ -15,13 +16,11 @@ class Mod extends Component {
   };
 
   launch = () => {
-    const {data, sysAppStore} = this.props;
+    const {data} = this.props;
 
     PkgManager.runApp(data.packageName);
 
-    // if (sysAppStore) {
-    //   sysAppStore.toggleExpanded();
-    // }
+    emitter.emit('closeSysAppPanel');
   }
 
   showMenu = () => {
