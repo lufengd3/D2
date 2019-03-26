@@ -1,4 +1,5 @@
-import {observable, autorun} from 'mobx'
+import {observable, autorun, action} from 'mobx';
+import {isWeex} from 'universal-env';
 
 class ObservableContainerStore {
   width = 750;
@@ -8,6 +9,18 @@ class ObservableContainerStore {
     autorun(() => {
       console.log('container height: ' + this.height);
     });
+  }
+
+  @action
+  updateSize() {
+    if (isWeex) {
+      const dom = require('@weex-module/dom');
+      dom.getComponentRect('viewport', (e) => {
+        if (e && e.size && e.size.height) {
+          this.height = parseInt(e.size.height);
+        }
+      });
+    }
   }
 }
 

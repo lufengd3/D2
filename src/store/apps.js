@@ -4,12 +4,10 @@ import {isWeex} from 'universal-env';
 import {sortArrByObjectValue} from '../utils/index';
 
 class ObservableAppsStore {
-  // 全部应用
-  @observable apps = [];
   // 字母表排序全部应用
   @observable pinyinApps = [];
-  // 主屏应用
-  @observable homeApps = [];
+  // 核心应用
+  @observable sysApps = [];
 
   constructor() {
     this.readApps();
@@ -21,9 +19,9 @@ class ObservableAppsStore {
       const data = PkgManager.getApps('all');
 
       if (data && data.length) {
-        this.apps = this.processAppsInfo(data);
-        this.pinyinApps = this.sortAppsByPinyin(data);
-        this.homeApps = this.filterHomeApps(data);
+        const apps = this.processAppsInfo(data);
+        this.pinyinApps = this.sortAppsByPinyin(apps);
+        this.sysApps = this.filterSysApps(apps);
       }
     }
   }
@@ -72,21 +70,22 @@ class ObservableAppsStore {
     }
   }
 
-  filterHomeApps(data) {
+  filterSysApps(data) {
     const apps = [];
-
+    const appNameWhiteList = [
+      '电话',
+      '相机',
+      '浏览器',
+    ];
     data.map((item) => {
-      if (
-        item.appName.match('短信')
-        || item.appName.match('电话')
-        || item.appName.match('相机')
-        || item.appName.match('浏览器')
-      ) {
-        apps.push(item);
+      const index = appNameWhiteList.indexOf(item.appName);
+      if (index > -1) {
+        apps[index] = item;
       }
     });
 
-    return apps;
+    // 如果 whitelist 里的应用不存在，过滤掉，否则会有下标数据 undefine
+    return apps.filter(item => item);
   }
 
 }

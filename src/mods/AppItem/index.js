@@ -15,9 +15,13 @@ class Mod extends Component {
   };
 
   launch = () => {
-    const {data} = this.props;
+    const {data, sysAppStore} = this.props;
 
     PkgManager.runApp(data.packageName);
+
+    // if (sysAppStore) {
+    //   sysAppStore.toggleExpanded();
+    // }
   }
 
   showMenu = () => {
@@ -72,7 +76,12 @@ class Mod extends Component {
   }
 
   render() {
-    const {data, hideTitle} = this.props;
+    const {
+      data,
+      hideTitle,
+      containerStyle = {},
+      iconStyle = {}
+    } = this.props;
     const {menuVisable, top, left} = this.state;
 
     if (!data || !data.appName) {
@@ -86,8 +95,8 @@ class Mod extends Component {
     };
 
     return [
-      <Touchable style={styles.container} onPress={this.launch} onLongPress={this.showMenu} ref="itemContainer">
-        <appicon name={data.packageName} style={styles.appicon} />
+      <Touchable style={[styles.container, containerStyle]} onPress={this.launch} onLongPress={this.showMenu} ref="itemContainer">
+        <appicon name={data.packageName} style={[styles.appicon, iconStyle]} />
         {hideTitle ? null : <Text style={styles.appName} numberOfLines={1}>{data.appName}</Text>}
       </Touchable>,
       menuVisable ?
