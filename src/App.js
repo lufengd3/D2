@@ -48,7 +48,7 @@ class App extends Component {
           <View style={styles.sliderItemContainer}>
             {/* <Image source={{uri: imgUrl}} resizeMode="cover" style={{width, height, position: 'absolute', top: 0, left: 0}} /> */}
             <AppPanel style={itemStyle} />
-            <Refresh />
+            {/* <Refresh /> */}
           </View>
 
         </Slider>

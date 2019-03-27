@@ -168,7 +168,7 @@ class App extends Component {
           <Image style={[styles.image]} source={{uri:'http://pozkwhz9d.bkt.clouddn.com/setting.png'}} />
         </Touchable>
 
-        <Touchable style={[styles.btn, {backgroundColor: DARK}]} ref="main_btn" onPress={this.clickBtn}>
+        <Touchable style={[styles.btn, {backgroundColor: LIGHT}]} ref="main_btn" onPress={this.clickBtn}>
           <Image style={[styles.image]} ref="main_image" source={{uri:'https://gw.alicdn.com/tfs/TB1PZ25antYBeNjy1XdXXXXyVXa-128-128.png'}} />
         </Touchable>
 
