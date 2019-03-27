@@ -20,7 +20,7 @@
   justify-content: center;
   position: absolute;
   border-radius: 60;
-  bottom: 60;
+  bottom: 20;
   left: 325;
 }
 
@@ -30,5 +30,5 @@
   left: 0;
   bottom: 0;
   right: 0;
-  background-color: transparent;
+  background-color: rgba(0, 0, 0, 0.7);
 }

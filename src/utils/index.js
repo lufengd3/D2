@@ -12,10 +12,14 @@ export function sortArrByObjectValue(arr, key) {
   });
 
   const sortedData = data.sort((a, b) => {
-    const strA = String(a[1]).toLowerCase();
-    const strB = String(b[1]).toLowerCase();
+    if (typeof a[1] === 'number' && typeof b[1] === 'number') {
+      return b[1] - a[1];
+    } else {
+      const strA = String(a[1]).toLowerCase();
+      const strB = String(b[1]).toLowerCase();
 
-    return strA.localeCompare(strB);
+      return strA.localeCompare(strB);
+    }
   });
 
   return sortedData.map((item) => {

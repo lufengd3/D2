@@ -23,12 +23,13 @@ class App extends Component {
   render() {
     const {containerStore} = this.props;
     const {width, height} = containerStore;
+    const itemStyle = {width, height};
 
     return (
       <View style={styles.app} id={'appcontainer'}>
         <View style={{width, height, position: 'absolute', top: 0, left: 0, backgroundColor: 'rgba(30, 30, 30, 0.2)'}} />
         <Slider
-          index={1}
+          // index={1}
           style={styles.slider}
           loop={false}
           showsPagination={false}
@@ -36,18 +37,18 @@ class App extends Component {
           height={height}
         >
 
-          <View style={styles.sliderItemContainer}>
-            <FastPanel />
-          </View>
+          {/* <View style={styles.sliderItemContainer}>
+            <FastPanel style={itemStyle} />
+          </View> */}
 
           <View style={styles.sliderItemContainer}>
-            <HomePanel style={{width, height}} />
+            <HomePanel style={itemStyle} />
           </View>
 
           <View style={styles.sliderItemContainer}>
             {/* <Image source={{uri: imgUrl}} resizeMode="cover" style={{width, height, position: 'absolute', top: 0, left: 0}} /> */}
-            <AppPanel style={{width, height}} />
-            {/* <Refresh /> */}
+            <AppPanel style={itemStyle} />
+            <Refresh />
           </View>
 
         </Slider>

@@ -107,7 +107,7 @@ class App extends Component {
     const rightApp = getEl(this.refs.rightApp);
     const currentX = isExpanded ? -120 : 0;
     const targetX = isExpanded ? 120 : -120;
-      
+
     Binding.bind({
     	eventType:'timing',
         exitExpression:{

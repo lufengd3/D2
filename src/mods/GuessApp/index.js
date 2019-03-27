@@ -7,21 +7,19 @@ import {inject, observer} from 'mobx-rax';
 
 @inject('appsStore')
 @observer
-class FastPanel extends Component {
+class GuessApp extends Component {
   render() {
     const {appsStore} = this.props;
     const {importantApps} = appsStore;
 
     return (
-      <View style={[styles.container, this.props.style]}>
-        {/* <View style={styles.appItemContainer}>
-          {importantApps.map((appInfo) => {
-            return <AppItem data={appInfo} />
-          })}
-        </View> */}
+      <View style={styles.appItemContainer}>
+        {importantApps.map((appInfo) => {
+          return <AppItem data={appInfo} />
+        })}
       </View>
     );
   }
 }
 
-export default FastPanel;
+export default GuessApp;

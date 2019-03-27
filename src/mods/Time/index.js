@@ -32,7 +32,10 @@ class Mod extends Component {
     const month = date.getMonth() + 1;
     const day = date.getDate();
 
-    const formatOptions = { weekday: 'long'};
+    const formatOptions = {
+      weekday: 'long',
+      timeZone: 'UTC'
+    };
     const weekday = new Intl.DateTimeFormat('zh-CN', formatOptions).format(date);
 
     this.setState({

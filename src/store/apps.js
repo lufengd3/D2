@@ -3,11 +3,15 @@ import pinyin from 'tiny-pinyin';
 import {isWeex} from 'universal-env';
 import {sortArrByObjectValue} from '../utils/index';
 
+const TOP_COUNT = 10;
+
 class ObservableAppsStore {
   // 字母表排序全部应用
   @observable pinyinApps = [];
   // 核心应用
   @observable sysApps = [];
+  // 高频应用
+  @observable importantApps = [];
 
   constructor() {
     this.readApps();
@@ -16,12 +20,18 @@ class ObservableAppsStore {
   readApps() {
     if (isWeex) {
       const PkgManager = require('@weex-module/PackageManager');
-      const data = PkgManager.getApps('all');
 
+      const data = PkgManager.getApps('all');
       if (data && data.length) {
         const apps = this.processAppsInfo(data);
         this.pinyinApps = this.sortAppsByPinyin(apps);
         this.filterSysApps(apps);
+      }
+
+      const dataWithFrequency = PkgManager.getApps('frequency');
+      if (dataWithFrequency && dataWithFrequency.length) {
+        const apps = this.processAppsInfo(dataWithFrequency);
+        this.importantApps = this.sortAppsByFrequency(apps);
       }
     }
   }
@@ -103,6 +113,12 @@ class ObservableAppsStore {
         'browser',
       ];
     }
+  }
+
+  sortAppsByFrequency(data) {
+    const result = sortArrByObjectValue(data, 'launchCount');
+
+    return result.slice(0, TOP_COUNT);
   }
 
 }
