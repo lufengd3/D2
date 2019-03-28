@@ -75,7 +75,7 @@ class Mod extends Component {
     const warningModeStartTime = this.state.warningModeStartTime || settingStore.warningModeStartTime;
     const warningModeEndTime = this.state.warningModeEndTime || settingStore.warningModeEndTime;
 
-    Toast.show(`休息提示时间设置为 ${warningModeStartTime} - ${warningModeEndTime}`);
+    Toast.show(`休息时间设置为 ${warningModeStartTime} - ${warningModeEndTime}`);
     emitter.emit(emitterChannel.SETTING_UPDATEED);
   }
 
@@ -92,7 +92,7 @@ class Mod extends Component {
         </Touchable>
         
         <Modal ref="modal" contentStyle={styles.modal} duration={160} delay={0}>
-          <Text style={styles.title}>设置休息提示时间</Text>
+          <Text style={styles.title}>设置休息时间</Text>
 
           <View style={styles.inputGroup}>
             <Text style={styles.labelText}>开始时间</Text>
