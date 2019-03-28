@@ -4,6 +4,7 @@ import {isWeex} from 'universal-env';
 class ObservableContainerStore {
   width = 750;
   @observable height = screen.height * (750 / screen.width);
+  @observable warningMode = false;
 
   constructor() {
     autorun(() => {
@@ -21,6 +22,11 @@ class ObservableContainerStore {
         }
       });
     }
+  }
+
+  @action
+  switchWarningMode(isWarningMode = false) {
+    this.warningMode = isWarningMode;
   }
 }
 

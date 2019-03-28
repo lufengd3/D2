@@ -1,9 +1,11 @@
-import {observable} from 'mobx';
+import {observable, action} from 'mobx';
 import pinyin from 'tiny-pinyin';
 import {isWeex} from 'universal-env';
+import throttle from 'lodash.throttle';
 import {sortArrByObjectValue} from '../utils/index';
 
 const TOP_COUNT = 10;
+const LAUNCHER_PACKAGE_NAME = 'me.lufeng.d1';
 
 class ObservableAppsStore {
   // 字母表排序全部应用
@@ -15,35 +17,64 @@ class ObservableAppsStore {
 
   constructor() {
     this.readApps();
+    this.addPackageListener();
   }
 
   readApps() {
-    if (isWeex) {
-      const PkgManager = require('@weex-module/PackageManager');
+    this.readAllApps();
+    this.readImportantApps();
+  }
 
-      const data = PkgManager.getApps('all');
-      if (data && data.length) {
-        const apps = this.processAppsInfo(data);
-        this.pinyinApps = this.sortAppsByPinyin(apps);
-        this.filterSysApps(apps);
-      }
+  addPackageListener() {
+    const self = this;
+    const globalEvent = require('@weex-module/globalEvent');
 
-      const dataWithFrequency = PkgManager.getApps('frequency');
-      if (dataWithFrequency && dataWithFrequency.length) {
-        const apps = this.processAppsInfo(dataWithFrequency);
-        this.importantApps = this.sortAppsByFrequency(apps);
-      }
+    globalEvent.addEventListener('launcher.update', () => {
+      this.readApps();
+    });
+  }
+
+  readAllApps() {
+    const PkgManager = require('@weex-module/PackageManager');
+    const data = PkgManager.getApps('all');
+
+    if (data && data.length) {
+      const apps = this.processAppsInfo(data);
+      this.pinyinApps = this.sortAppsByPinyin(apps);
+      this.filterSysApps(apps);
     }
   }
 
+  @action
+  readImportantApps = throttle(() => {
+    const permissionManager = require('@weex-module/PermissionManager');
+    const granted = permissionManager.checkUsagePermission();
+
+    if (granted) {
+      const PkgManager = require('@weex-module/PackageManager');
+      const importantAppsData = PkgManager.getApps('important');
+
+      if (importantAppsData && importantAppsData.length) {
+        const apps = this.processAppsInfo(importantAppsData);
+        this.importantApps = this.sortAppsByActiveScore(apps);
+      }
+    }
+  }, 3*6e4);
+
   processAppsInfo(data) {
-    return data.map((item) => {
+    const apps = [];
+
+    data.map((item) => {
       if (item.appName.match('手机')) {
         item.appName = item.appName.replace('手机', '');
       }
 
-      return item;
+      if (item.packageName !== LAUNCHER_PACKAGE_NAME) {
+        apps.push(item);
+      }
     });
+
+    return apps;
   }
 
   sortAppsByPinyin(data) {
@@ -115,10 +146,11 @@ class ObservableAppsStore {
     }
   }
 
-  sortAppsByFrequency(data) {
-    const result = sortArrByObjectValue(data, 'launchCount');
+  sortAppsByActiveScore(data) {
+    const sortedData = sortArrByObjectValue(data, 'activeScore');
+    const result = sortedData.slice(0, TOP_COUNT);
 
-    return result.slice(0, TOP_COUNT);
+    return result;
   }
 
 }

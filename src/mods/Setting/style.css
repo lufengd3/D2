@@ -1,0 +1,13 @@
+.dialogContainer {
+  width: 712;
+  height: 400;
+  position: fixed;
+  top: 400;
+  left: 24;
+  background-color: red;
+}
+
+.image {
+	width:70;
+  height:70;
+}

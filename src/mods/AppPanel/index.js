@@ -6,9 +6,10 @@ import Touchable from 'rax-touchable';
 import AppItem from '../AppItem';
 import WallPaperButton from '../WallpaperButton';
 import styles from './style.css';
-import {inject} from 'mobx-rax';
+import {inject, observer} from 'mobx-rax';
 
 @inject('appsStore')
+@observer
 class AppPanel extends Component {
 
   render() {

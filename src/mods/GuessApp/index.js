@@ -13,11 +13,15 @@ class GuessApp extends Component {
     const {importantApps} = appsStore;
 
     return (
-      <View style={styles.appItemContainer}>
-        {importantApps.map((appInfo) => {
-          return <AppItem data={appInfo} />
-        })}
+      <View style={styles.container}>
+        <Text style={styles.title}>常用的应用</Text>
+        <View style={styles.appItemContainer}>
+          {importantApps.map((appInfo) => {
+            return <AppItem data={appInfo} />
+          })}
+        </View>
       </View>
+
     );
   }
 }

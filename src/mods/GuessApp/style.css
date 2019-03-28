@@ -1,16 +1,21 @@
 .container {
-  /* background-color: indianred; */
+  background-color: rgba(0, 0, 0, 0.5);
   /* position: absolute; */
-  flex: 0;
-  width: 750;
-}
-.appItemContainer {
   position: absolute;
-  bottom: 100;
-  left: 60;
-  width: 630;
-  /* margin-left: 60; */
+  bottom: 60;
+  left: 24;
+  border-radius: 24;
+}
+
+.title {
+  color: #ffffff;
+  font-size: 24;
+  margin: 24 0 24 30;
+}
+
+.appItemContainer {
+  width: 712;
   flex-direction: row;
-  justify-content: flex-start;
+  justify-content: space-around;
   flex-wrap: wrap;
 }

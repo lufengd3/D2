@@ -1,16 +1,17 @@
-import {createElement, Component} from 'rax';
+import {createElement, Component, setNativeProps, findDOMNode} from 'rax';
 import View from 'rax-view';
 import Image from 'rax-image';
 import Slider from 'rax-slider';
-// import {isWeex} from 'universal-env';
+import emitter from 'tiny-emitter/instance';
 import HomePanel from './mods/HomePanel';
 import FastPanel from './mods/FastPanel';
 import AppPanel from './mods/AppPanel';
 import Refresh from './mods/Refresh';
 import styles from './App.css';
+import {emitterChannel} from './constant';
 import {observer, inject} from 'mobx-rax';
 
-@inject('containerStore')
+@inject('containerStore', 'appsStore')
 @observer
 class App extends Component {
 
@@ -18,16 +19,56 @@ class App extends Component {
     const {containerStore} = this.props;
 
     containerStore.updateSize();
+
+    setNativeProps(findDOMNode(document.body), {
+      onViewAppear: () => {
+        emitter.emit(emitterChannel.PAGE_APPEAR);
+        this.handlePageAppear();
+      },
+      onViewDisappear: () => {
+        emitter.emit(emitterChannel.PAGE_APPEAR);
+
+        this.handlePageDisappear();
+      }
+    });
+  }
+
+  handlePageAppear() {
+    this.checkWarningMode();
+
+    const {appsStore} = this.props;
+    appsStore.readImportantApps();
+
+  }
+
+  handlePageDisappear() {
+  }
+
+  checkWarningMode() {
+    const {containerStore} = this.props;
+    const h = new Date().getHours();
+
+    if (h >= 0 && h < 6) {
+      containerStore.warningMode = true;
+    } else {
+      containerStore.warningMode = false;
+    }
   }
 
   render() {
     const {containerStore} = this.props;
-    const {width, height} = containerStore;
+    const {width, height, warningMode} = containerStore;
     const itemStyle = {width, height};
+    const maskStyle = {
+      ...styles.mask,
+      width,
+      height,
+      backgroundColor: warningMode ? 'red' : styles.mask.backgroundColor
+    };
 
     return (
       <View style={styles.app} id={'appcontainer'}>
-        <View style={{width, height, position: 'absolute', top: 0, left: 0, backgroundColor: 'rgba(30, 30, 30, 0.2)'}} />
+        <View style={maskStyle} />
         <Slider
           // index={1}
           style={styles.slider}
@@ -37,16 +78,15 @@ class App extends Component {
           height={height}
         >
 
-          {/* <View style={styles.sliderItemContainer}>
+          <View style={styles.sliderItemContainer}>
             <FastPanel style={itemStyle} />
-          </View> */}
+          </View>
 
           <View style={styles.sliderItemContainer}>
             <HomePanel style={itemStyle} />
           </View>
 
           <View style={styles.sliderItemContainer}>
-            {/* <Image source={{uri: imgUrl}} resizeMode="cover" style={{width, height, position: 'absolute', top: 0, left: 0}} /> */}
             <AppPanel style={itemStyle} />
             {/* <Refresh /> */}
           </View>

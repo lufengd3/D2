@@ -1,16 +1,4 @@
 .container {
   /* background-color: indianred; */
-  /* position: absolute; */
-  flex: 0;
   width: 750;
-}
-.appItemContainer {
-  position: absolute;
-  bottom: 60;
-  left: 60;
-  width: 630;
-  /* margin-left: 60; */
-  flex-direction: row;
-  justify-content: flex-start;
-  flex-wrap: wrap;
 }

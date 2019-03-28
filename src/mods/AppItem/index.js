@@ -3,6 +3,8 @@ import Text from 'rax-text';
 import View from 'rax-view';
 import Touchable from 'rax-touchable';
 import emitter from 'tiny-emitter/instance';
+// import {inject, observer} from 'mobx-rax';
+import {emitterChannel} from '../../constant';
 import styles from './style.css';
 
 const PkgManager = require('@weex-module/PackageManager');
@@ -11,16 +13,15 @@ class Mod extends Component {
 
   state = {
     menuVisable: false,
-    top: 0,
-    left: 0
+    menuPosition: {}
   };
 
   launch = () => {
-    const {data} = this.props;
+    const {data, appsStore} = this.props;
 
     PkgManager.runApp(data.packageName);
 
-    emitter.emit('closeSysAppPanel');
+    emitter.emit(emitterChannel.APP_LAUNCH);
   }
 
   showMenu = () => {
@@ -30,14 +31,21 @@ class Mod extends Component {
     const dom = require('@weex-module/dom');
     dom.getComponentRect(findDOMNode(this.refs.itemContainer), (res) => {
       if (res.size) {
-        const left = res.size.left || 0;
-        const top = res.size.top || 0;
+        const {left, top} = res.size;
         const menuHeight = styles.menuContainer.height;
+
+        const position = {
+          top: top > menuHeight ? top - menuHeight : top + 20
+        };
+        if (left > 550) {
+          position.right = 26;
+        } else {
+          position.left = left + 26;
+        }
 
         this.setState({
           menuVisable: true,
-          top: top - menuHeight,
-          left: left + 30
+          menuPosition: position
         });
       }
     });
@@ -54,7 +62,8 @@ class Mod extends Component {
 
   hideMenu = () => {
     this.setState({
-      menuVisable: false
+      menuVisable: false,
+      menuPosition: {}
     });
   }
 
@@ -81,7 +90,7 @@ class Mod extends Component {
       containerStyle = {},
       iconStyle = {}
     } = this.props;
-    const {menuVisable, top, left} = this.state;
+    const {menuVisable, menuPosition} = this.state;
 
     if (!data || !data.appName) {
       return null;
@@ -89,8 +98,7 @@ class Mod extends Component {
 
     const menuContainerStyle = {
       ...styles.menuContainer,
-      top,
-      left
+      ...menuPosition
     };
 
     return [
@@ -102,10 +110,10 @@ class Mod extends Component {
       <View>
         <Touchable style={styles.transparentBG} onPress={this.hideMenu} />
         <View style={menuContainerStyle}>
-          <Touchable onPress={this.uninstallApp}>
+          <Touchable style={styles.menuItem} onPress={this.uninstallApp}>
             <Text>Uninstall</Text>
           </Touchable>
-          <Touchable onPress={this.showAppInfo}>
+          <Touchable style={styles.menuItem} onPress={this.showAppInfo}>
             <Text>App Info</Text>
           </Touchable>
         </View>

@@ -8,7 +8,9 @@ import {isWeex} from 'universal-env';
 import {observer, inject} from 'mobx-rax';
 import emitter from 'tiny-emitter/instance';
 import AppItem from '../AppItem';
+import Setting from '../Setting';
 import WallPaperButton from '../WallpaperButton';
+import {emitterChannel} from '../../constant';
 
 import styles from './style.css';
 
@@ -28,7 +30,7 @@ class App extends Component {
   };
 
   componentDidMount() {
-    emitter.on('closeSysAppPanel', () => {
+    emitter.on(emitterChannel.APP_LAUNCH, () => {
       if (this.state.isExpanded) {
         this.clickBtn();
       }
@@ -160,16 +162,16 @@ class App extends Component {
           )
         })}
 
-        <Touchable style={[styles.btn]} ref={'leftApp'}>
+        <View style={styles.btn} ref={'leftApp'}>
           <WallPaperButton />
-        </Touchable>
+        </View>
 
-        <Touchable style={[styles.btn]} ref={'rightApp'}>
-          <Image style={[styles.image]} source={{uri:'http://pozkwhz9d.bkt.clouddn.com/setting.png'}} />
-        </Touchable>
+        <View style={styles.btn} ref={'rightApp'}>
+          <Setting />
+        </View>
 
         <Touchable style={[styles.btn, {backgroundColor: LIGHT}]} ref="main_btn" onPress={this.clickBtn}>
-          <Image style={[styles.image]} ref="main_image" source={{uri:'https://gw.alicdn.com/tfs/TB1PZ25antYBeNjy1XdXXXXyVXa-128-128.png'}} />
+          <Image style={styles.image} ref="main_image" source={{uri:'https://gw.alicdn.com/tfs/TB1PZ25antYBeNjy1XdXXXXyVXa-128-128.png'}} />
         </Touchable>
 
       </View>
