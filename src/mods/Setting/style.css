@@ -1,13 +1,66 @@
-.dialogContainer {
-  width: 712;
-  height: 400;
-  position: fixed;
-  top: 400;
-  left: 24;
-  background-color: red;
-}
-
 .image {
 	width:70;
   height:70;
+}
+
+.modal {
+  border-radius: 24;
+  height: 360;
+}
+
+.title {
+  font-size: 36;
+  color: #333333;
+  text-align: center;
+  margin-top: 24;
+  margin-bottom: 24;
+}
+
+.inputGroup {
+  margin-left: 30;
+  margin-top: 24;
+  flex-direction: row;
+  align-items: center;
+}
+
+.labelText {
+  margin-right: 24;
+  font-size: 28;
+  color: #333333;
+}
+
+.timeInput {
+  padding-left: 10;
+  border-width: 1;
+  height: 60;
+  border-radius: 10;
+  border-color: #3e3e3e;
+  width: 440;
+  justify-content: center;
+}
+
+.timeText {
+  font-size: 28;
+  color: #333333;
+}
+
+.btnContainer {
+  margin-top: 40;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.cancleText {
+  padding: 10;
+  margin-right: 40;
+  font-size: 24;
+  color: #2d9aa7;
+}
+
+.saveText {
+  padding: 10;
+  margin-right: 40;
+  font-size: 24;
+  color: #2d9aa7;
 }

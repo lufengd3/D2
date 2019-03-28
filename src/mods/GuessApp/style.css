@@ -7,10 +7,22 @@
   border-radius: 24;
 }
 
+.titleBar {
+  margin: 24;
+  /* background-color: green; */
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .title {
   color: #ffffff;
   font-size: 24;
-  margin: 24 0 24 30;
+}
+
+.refreshIcon {
+  width: 32;
+  height: 32;
 }
 
 .appItemContainer {

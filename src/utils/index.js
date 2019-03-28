@@ -2,8 +2,9 @@
 /**
  * input: [{name: 'def'}, {name: 'abc'}]
  * output: [{name: 'abc'}, {name: 'def'}]
- * @param {*} arr
- * @param {*} key
+ * @param {Array} arr
+ * @param {String} key
+ * @returns {Array}
  */
 export function sortArrByObjectValue(arr, key) {
   const data = [];
@@ -25,4 +26,23 @@ export function sortArrByObjectValue(arr, key) {
   return sortedData.map((item) => {
     return item[0];
   });
+}
+
+/**
+ * 时间转数字，'15:20' --> 1520
+ * @param {String} time 
+ * @returns {Number}
+ */
+export function getNumberByTime(time = '') {
+  const arr = time.split(':');
+  let currentNumber = 0;
+
+  arr.map((n, index) => {
+    const scale = Math.pow(100, arr.length - index - 1);
+
+    n = parseInt(n);
+    currentNumber += n * scale;
+  });
+
+  return currentNumber;
 }

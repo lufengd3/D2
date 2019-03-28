@@ -72,7 +72,7 @@ class WallPaperButton extends Component {
   render() {
     return (
       <Touchable onPress={this.updateWallPaper} style={styles.buttonContainer}>
-        <Image ref="icon" style={styles.image} source={{uri:'http://pozkwhz9d.bkt.clouddn.com/update.png'}} />
+        <Image ref="icon" style={styles.image} source={{uri:'http://pozkwhz9d.bkt.clouddn.com/refresh-128-2.png'}} />
       </Touchable>
     );
   }

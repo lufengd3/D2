@@ -46,20 +46,18 @@ class ObservableAppsStore {
   }
 
   @action
-  readImportantApps = throttle(() => {
-    const permissionManager = require('@weex-module/PermissionManager');
-    const granted = permissionManager.checkUsagePermission();
+  readImportantApps = () => {
+    const PkgManager = require('@weex-module/PackageManager');
+    const importantAppsData = PkgManager.getApps('important');
 
-    if (granted) {
-      const PkgManager = require('@weex-module/PackageManager');
-      const importantAppsData = PkgManager.getApps('important');
-
-      if (importantAppsData && importantAppsData.length) {
-        const apps = this.processAppsInfo(importantAppsData);
-        this.importantApps = this.sortAppsByActiveScore(apps);
-      }
+    if (importantAppsData && importantAppsData.length) {
+      const apps = this.processAppsInfo(importantAppsData);
+      this.importantApps = this.sortAppsByActiveScore(apps);
     }
-  }, 3*6e4);
+  }
+
+  // @action
+  // readImportantApps = throttle(this.forceReadImportantApps, 3*6e4);
 
   processAppsInfo(data) {
     const apps = [];
@@ -136,12 +134,14 @@ class ObservableAppsStore {
         '电话',
         '相机',
         '浏览器',
+        '设置'
       ];
     } else {
       return [
         'phone',
         'camera',
         'browser',
+        'settings'
       ];
     }
   }
