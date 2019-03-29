@@ -11,7 +11,7 @@ const REFRESH_ICON = 'http://pozkwhz9d.bkt.clouddn.com/refresh-128-2.png';
 
 @inject('appsStore')
 @observer
-class GuessApp extends Component {
+class GuessAppWidget extends Component {
 
   handlePress = () => {
     const permissionManager = require('@weex-module/PermissionManager');
@@ -29,7 +29,7 @@ class GuessApp extends Component {
     return (
       <View style={styles.container}>
         <View style={styles.titleBar}>
-          <Text style={styles.title}>常用的应用</Text>
+          <Text style={styles.title}>常用应用</Text>
           {importantApps.length ? null : <Touchable onPress={this.handlePress}>
             <Image source={{uri: REFRESH_ICON}} style={styles.refreshIcon} />
           </Touchable>}
@@ -45,4 +45,4 @@ class GuessApp extends Component {
   }
 }
 
-export default GuessApp;
+export default GuessAppWidget;

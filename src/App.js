@@ -12,9 +12,10 @@ import styles from './App.css';
 import {emitterChannel} from './constant';
 import {getNumberByTime} from './utils';
 
-@inject('containerStore', 'appsStore', 'settingStore')
+@inject('containerStore', 'appsStore', 'settingStore', 'systemStore')
 @observer
 class App extends Component {
+  appearCount = 0;
 
   componentDidMount() {
     const {containerStore} = this.props;
@@ -23,8 +24,12 @@ class App extends Component {
 
     setNativeProps(findDOMNode(document.body), {
       onViewAppear: () => {
-        emitter.emit(emitterChannel.PAGE_APPEAR);
-        this.handlePageAppear();
+        if (this.appearCount) {
+          emitter.emit(emitterChannel.PAGE_APPEAR);
+          this.handlePageAppear();
+        }
+
+        this.appearCount++;
       },
       onViewDisappear: () => {
         emitter.emit(emitterChannel.PAGE_APPEAR);
@@ -39,8 +44,10 @@ class App extends Component {
   handlePageAppear = () => {
     setTimeout(this.checkWarningMode, 1000);
 
-    const {appsStore} = this.props;
+    const {appsStore, systemStore} = this.props;
     appsStore.readImportantApps();
+    systemStore.updateHardwareStatus();
+
   }
 
   handlePageDisappear = () => {
@@ -98,7 +105,7 @@ class App extends Component {
 
           <View style={styles.sliderItemContainer}>
             <AppPanel style={itemStyle} />
-            <Refresh />
+            {/* <Refresh /> */}
           </View>
 
         </Slider>

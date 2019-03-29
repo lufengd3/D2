@@ -56,7 +56,7 @@ class Mod extends Component {
 
   saveTime = () => {
     this.hideModal();
-    
+
     const {settingStore} = this.props;
     const {warningModeStartTime, warningModeEndTime} = this.state;
     if (warningModeStartTime) {
@@ -90,7 +90,7 @@ class Mod extends Component {
         <Touchable onPress={this.showModal}>
           <Image style={styles.image} source={{uri:'http://pozkwhz9d.bkt.clouddn.com/setting-128.png'}} />
         </Touchable>
-        
+
         <Modal ref="modal" contentStyle={styles.modal} duration={160} delay={0}>
           <Text style={styles.title}>设置休息时间</Text>
 

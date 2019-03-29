@@ -1,0 +1,54 @@
+.container {
+  background-color: rgba(0, 0, 0, 0.5);
+  /* position: absolute; */
+  /* bottom: 60; */
+  /* left: 24; */
+  margin: 24;
+  margin-bottom: 0;
+  border-radius: 24;
+  padding-bottom: 12;
+}
+
+.groupContainer {
+  margin-left: 24;
+  margin-top: 24;
+  margin-right: 24;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title {
+  color: #ffffff;
+  font-size: 24;
+}
+
+.text {
+  font-size: 24;
+  color: #ffffff;
+}
+
+.percentageText {
+  font-size: 24;
+  color: #ffffff;
+  position: absolute;
+  top: 10;
+  right: 0;
+}
+
+.refreshIcon {
+  width: 32;
+  height: 32;
+}
+
+.statusBar {
+  width: 500;
+  height: 48;
+  border-radius: 24;
+  background-color: lightsteelblue;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  padding-left: 24;
+  margin-bottom: 12;
+}

@@ -26,10 +26,10 @@ class ObservableAppsStore {
   }
 
   addPackageListener() {
-    const self = this;
     const globalEvent = require('@weex-module/globalEvent');
 
-    globalEvent.addEventListener('launcher.update', () => {
+    globalEvent.addEventListener('launcher.changed', () => {
+      alert('app changed');
       this.readApps();
     });
   }
