@@ -29,7 +29,6 @@ class ObservableAppsStore {
     const globalEvent = require('@weex-module/globalEvent');
 
     globalEvent.addEventListener('launcher.changed', () => {
-      alert('app changed');
       this.readApps();
     });
   }

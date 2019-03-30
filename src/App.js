@@ -24,11 +24,8 @@ class App extends Component {
 
     setNativeProps(findDOMNode(document.body), {
       onViewAppear: () => {
-        if (this.appearCount) {
-          emitter.emit(emitterChannel.PAGE_APPEAR);
-          this.handlePageAppear();
-        }
-
+        emitter.emit(emitterChannel.PAGE_APPEAR);
+        this.handlePageAppear();
         this.appearCount++;
       },
       onViewDisappear: () => {
@@ -44,9 +41,11 @@ class App extends Component {
   handlePageAppear = () => {
     setTimeout(this.checkWarningMode, 1000);
 
-    const {appsStore, systemStore} = this.props;
-    appsStore.readImportantApps();
-    systemStore.updateHardwareStatus();
+    if (this.appearCount) {
+      const {appsStore, systemStore} = this.props;
+      appsStore.readImportantApps();
+      systemStore.updateHardwareStatus();
+    }
 
   }
 

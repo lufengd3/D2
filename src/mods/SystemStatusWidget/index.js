@@ -19,11 +19,14 @@ class GuessAppWidget extends Component {
       availableStorage,
       totalStorage
     } = systemStore.hardwareStatus;
-    const memoryUsedPercentage = (1 - availableMemory / totalMemory).toFixed(4);
-    const sotrageUsedPercentage = (1 - availableStorage / totalStorage).toFixed(4);
+    const memoryUsedRatio = (1 - availableMemory / totalMemory).toFixed(4);
+    const memoryUsedPercentageText = (memoryUsedRatio * 100).toFixed(2);
+    const storageUsedRatio = (1 - availableStorage / totalStorage).toFixed(4);
+    const storageUsedPercentageText = (storageUsedRatio * 100).toFixed(2);
+
     // 702 - 24 * 4
-    const memoryBarWidth = 654 * memoryUsedPercentage;
-    const storageBarWidth = 654 * sotrageUsedPercentage;
+    const memoryBarWidth = 654 * memoryUsedRatio;
+    const storageBarWidth = 654 * storageUsedRatio;
 
     return (
       <View style={styles.container}>
@@ -38,14 +41,14 @@ class GuessAppWidget extends Component {
           <View style={[styles.statusBar, {width: memoryBarWidth}]}>
             <Text style={styles.text}>内存: {totalMemory - availableMemory} / {totalMemory} MB</Text>
           </View>
-          <Text style={styles.percentageText}>已使用 {memoryUsedPercentage * 100}%</Text>
+          <Text style={styles.percentageText}>已使用 {memoryUsedPercentageText}%</Text>
         </View>
 
         <View style={styles.groupContainer}>
           <View style={[styles.statusBar, {width: storageBarWidth}]}>
             <Text style={styles.text}>存储: {totalStorage - availableStorage} / {totalStorage} GB</Text>
           </View>
-          <Text style={styles.percentageText}>已使用 {sotrageUsedPercentage * 100}%</Text>
+          <Text style={styles.percentageText}>已使用 {storageUsedPercentageText}%</Text>
         </View>
 
       </View>
