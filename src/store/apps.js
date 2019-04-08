@@ -39,8 +39,8 @@ class ObservableAppsStore {
 
     if (data && data.length) {
       const apps = this.processAppsInfo(data);
-      this.pinyinApps = this.sortAppsByPinyin(apps);
-      this.filterSysApps(apps);
+
+      this.updateAllApps(apps);
     }
   }
 
@@ -52,11 +52,17 @@ class ObservableAppsStore {
     if (importantAppsData && importantAppsData.length) {
       const apps = this.processAppsInfo(importantAppsData);
       this.importantApps = this.sortAppsByActiveScore(apps);
+
+      // 全部 apps 也需要使用频率数据，默认不展示不常用的 app
+      // const allImportantApps = this.filterOldApps(apps)
+      // this.updateAllApps(allImportantApps);
     }
   }
 
-  // @action
-  // readImportantApps = throttle(this.forceReadImportantApps, 3*6e4);
+  updateAllApps(apps) {
+    this.pinyinApps = this.sortAppsByPinyin(apps);
+    this.filterSysApps(apps);
+  }
 
   processAppsInfo(data) {
     const apps = [];
@@ -106,6 +112,26 @@ class ObservableAppsStore {
 
       return appArr;
     }
+  }
+
+  // TODO: usagestatus 取出来的数据，有多个重复的 apps，时间不对
+  filterOldApps(data) {
+    const appNames = {};
+    const apps = [];
+
+    data.map((item, index) => {
+      if (!appNames[item.appName]) {
+        appNames[item.appName] = 1;
+
+        // 如果有使用时间，超过15天未使用的不显示
+        const duration = 15 * 24 * 3600 * 1000;
+        if (Date.now() - item.lastTimeUsed < duration) {
+          apps.push(item);
+        }
+      }
+    });
+
+    return apps;
   }
 
   filterSysApps(data) {

@@ -91,7 +91,7 @@ class App extends Component {
           element: elm,
           property: 'transform.translateY',
           expression:{
-            origin: `easeOutBounce(t, ${currentY}, ${targetY}, 500)`
+            origin: `easeOutSine(t, ${currentY}, ${targetY}, 160)`
           }
       });
     });
@@ -119,13 +119,13 @@ class App extends Component {
           element: leftApp,
           property: 'transform.translateX',
           expression:{
-            origin: `easeOutBounce(t, ${currentX}, ${targetX}, 500)`
+            origin: `easeOutSine(t, ${currentX}, ${targetX}, 160)`
           }
         }, {
           element: rightApp,
           property: 'transform.translateX',
           expression:{
-            origin: `easeOutBounce(t, ${-currentX}, ${-targetX}, 500)`
+            origin: `easeOutSine(t, ${-currentX}, ${-targetX}, 160)`
           }
         }]
     });

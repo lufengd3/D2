@@ -88,7 +88,7 @@ class App extends Component {
         <Slider
           index={1}
           style={styles.slider}
-          loop={false}
+          loop={true}
           showsPagination={false}
           width={width}
           height={height}
