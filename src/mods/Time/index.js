@@ -1,8 +1,13 @@
 import {createElement, Component} from 'rax';
 import Text from 'rax-text';
 import View from 'rax-view';
+import Touchable from 'rax-touchable';
+import {inject, observer} from 'mobx-rax';
+import AppItem from '../AppItem';
 import styles from './style.css';
 
+@inject('appsStore')
+@observer
 class Mod extends Component {
   constructor(props) {
     super(props);
@@ -50,19 +55,33 @@ class Mod extends Component {
     return n.toString().length === 1 ? '0' + n : n;
   }
 
+  openClock = () => {
+    const {appsStore} = this.props;
+    const {clockPackageName} = appsStore;
+
+    AppItem.launch(clockPackageName);
+  }
+
+  openCalendar = () => {
+    const {appsStore} = this.props;
+    const {calendarPackageName} = appsStore;
+
+    AppItem.launch(calendarPackageName);
+  }
+
   render() {
     const {time, sec, date, weekday} = this.state;
 
     return (
       <View style={styles.container}>
-        <View style={styles.timeContainer}>
+        <Touchable style={styles.timeContainer} onPress={this.openClock}>
           <Text style={styles.time}>{time}</Text>
           <Text style={styles.time}>{sec}</Text>
-        </View>
-        <View style={styles.timeContainer}>
+        </Touchable>
+        <Touchable style={styles.timeContainer} onPress={this.openCalendar}>
           <Text style={styles.date}>{date}</Text>
           <Text style={styles.weekday}>{weekday}</Text>
-        </View>
+        </Touchable>
       </View>
     );
   }

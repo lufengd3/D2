@@ -14,6 +14,10 @@ class ObservableAppsStore {
   @observable sysApps = [];
   // 高频应用
   @observable importantApps = [];
+  
+  @observable clockPackageName = null;
+
+  @observable calendarPackageName = null;
 
   constructor() {
     this.readApps();
@@ -74,6 +78,14 @@ class ObservableAppsStore {
 
       if (item.packageName !== LAUNCHER_PACKAGE_NAME) {
         apps.push(item);
+      }
+
+      if (item.appName === '时钟' || item.appName === 'Clock') {
+        this.clockPackageName = item.packageName;
+      }
+
+      if (item.appName === '日历' || item.appName === 'Calendar') {
+        this.calendarPackageName = item.packageName;
       }
     });
 

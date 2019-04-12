@@ -18,7 +18,12 @@ class GuessAppWidget extends Component {
     const granted = permissionManager.checkUsagePermission();
 
     if (!granted) {
-      permissionManager.requestUsagePermission();
+      const modal = require('@weex-module/modal');
+      modal.confirm({
+          message: '授予使用情况访问权限后可显示常用应用',
+      }, (value) => {
+        permissionManager.requestUsagePermission();
+      });
     }
   }
 

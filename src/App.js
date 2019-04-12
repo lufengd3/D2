@@ -95,7 +95,7 @@ class App extends Component {
         >
 
           <View style={styles.sliderItemContainer}>
-            <FastPanel style={itemStyle} />
+            {containerStore.warningMode ? null : <FastPanel style={itemStyle} />}
           </View>
 
           <View style={styles.sliderItemContainer}>
@@ -103,7 +103,7 @@ class App extends Component {
           </View>
 
           <View style={styles.sliderItemContainer}>
-            <AppPanel style={itemStyle} />
+            {containerStore.warningMode ? null : <AppPanel style={itemStyle} />}
             {/* <Refresh /> */}
           </View>
 

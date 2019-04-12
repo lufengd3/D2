@@ -11,6 +11,12 @@ const PkgManager = require('@weex-module/PackageManager');
 
 class Mod extends Component {
 
+  static launch = (packageName) => {
+    if (packageName) {
+      PkgManager.runApp(packageName);
+    }
+  }
+
   state = {
     menuVisable: false,
     menuPosition: {}
