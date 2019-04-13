@@ -20,8 +20,8 @@ class GuessAppWidget extends Component {
     if (!granted) {
       const modal = require('@weex-module/modal');
       modal.confirm({
-          message: '授予使用情况访问权限后可显示常用应用',
-      }, (value) => {
+          message: '请从列表中选择 D1 Launcher 并打开 [使用数据访问] 权限'
+      }, () => {
         permissionManager.requestUsagePermission();
       });
     }
