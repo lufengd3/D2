@@ -10,7 +10,7 @@ import AppPanel from './mods/AppPanel';
 import Refresh from './mods/Refresh';
 import styles from './App.css';
 import {emitterChannel} from './constant';
-import {getNumberByTime} from './utils';
+import {getNumberByTime, rgbaToHex} from './utils';
 
 @inject('containerStore', 'appsStore', 'settingStore', 'systemStore')
 @observer
@@ -71,6 +71,20 @@ class App extends Component {
     }
   }
 
+  // 注意：不要传 rgb
+  updateNavigationBarColor = (color = '') => {
+    if (!color) return;
+
+    if (color.match(/rgba/i)) {
+      // rgb 30 === 1e
+      // alpha 20% === 33
+      color = rgbaToHex(color);
+    }
+
+    const appWindow = require('@weex-module/AppWindow');
+    appWindow.updateNavgationBarColor(color);
+  }
+
   render() {
     const {containerStore} = this.props;
     const {width, height, warningMode} = containerStore;
@@ -78,9 +92,10 @@ class App extends Component {
     const maskStyle = {
       ...styles.mask,
       width,
-      height,
-      backgroundColor: warningMode ? 'red' : styles.mask.backgroundColor
+      height: height + 4,
+      backgroundColor: warningMode ? '#ff0000' : 'rgba(30, 30, 30, 0.2)'
     };
+    this.updateNavigationBarColor(maskStyle.backgroundColor);
 
     return (
       <View style={styles.app} id={'appcontainer'}>
