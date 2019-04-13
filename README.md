@@ -1,6 +1,6 @@
 
 ## TODO
-- 异步下载图片
+- 壁纸替换完成的 callback
 - 天气
 - 添加重要应用到主屏
 - 屏幕时间
@@ -10,7 +10,6 @@
 - 设置
   - bundle 地址
   - 扫码
-- 加载本地 bundle
 
 ## Getting Started
 
