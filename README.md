@@ -1,6 +1,8 @@
 ## About
 Build [Android launcher with rax or Vue](https://github.com/lufengd3/D1/tree/feature_img_adapter)!
 
+Demo: https://play.google.com/store/apps/details?id=me.lufeng.d1
+
 ## TODO
 - 壁纸替换完成的 callback
 - 天气
