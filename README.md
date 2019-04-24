@@ -1,3 +1,5 @@
+## About
+Build [Android launcher with rax or Vue](https://github.com/lufengd3/D1/tree/feature_img_adapter)!
 
 ## TODO
 - 壁纸替换完成的 callback
